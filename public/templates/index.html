@@ -23,8 +23,9 @@
 <!-- Socket.io script -->
 <script src="/socket.io/socket.io.js"></script>
 <script>
+	var socket = io();
 	$(function () {
-		var socket = io();
+		
 		// var gettext = document.getElementById('maintextarea')
 		// gettext = $(".codemirror-textarea").val();
 
@@ -38,7 +39,32 @@
 			$('#message').append($('<span class="glyphicon glyphicon-user"></span><br>').text(msg));
 	
 		});
+
+		socket.on('output code', function(output_code){
+			document.getElementById('output').innerText = " ";
+			$('#output').append($('<span></span>').text(output_code));
+			console.log(output_code)
+			// console.log("this the code  =>"+JSONstringfy output_code);
+	
+		});
+
+		// $('inp').onchange(function(){
+		// 	socket.on('main textarea', $('#maintextarea').val());
+		// 	return false
+		// })
+
+
 	});
+
+	function workspaces(){
+		alert("Workspace");
+	}
+
+	function addworkspace(){
+		var workspace = prompt("Workspace Name", "newspace");
+		var filename = prompt("File Name", "file");
+
+	}
   
 </script> <!-- End of socket script -->
 
@@ -75,8 +101,8 @@
 
 			<div class="well bs-sidebar" id="sidebar" style="background-color:#fff">
 			  <ul class="nav nav-pills nav-stacked">
-				<li><a href='#'>ADD WORKSPACE</a></li>
-				<li><a href='#'>WORKSPACES</a></li>
+				<li><button onclick="addworkspace()" style="width: 100%">ADD WORKSPACE</button></li>
+				<li><button onclick="workspaces()" style="width: 100%">WORKSPACES</button></li>
 			  </ul>
 			</div> <!--well bs-sidebar affix-->
 
@@ -86,13 +112,22 @@
 			<div class='container-fluid'>
 			   <br><br>
 			   <!-- {% block content %} -->
-				<p><textarea id="maintextarea" class="codemirror-textarea" style="width: 100%;"></textarea></p>
+				<!-- <p><textarea id="maintextarea" class="codemirror-textarea" style="width: 100%;"></textarea></p> -->
+				<p><input type="" name="" id="maintextarea" class="codemirror-textarea" style="width: 100%;"></p>
 
 				<div class="container">
-					<button type="button" class="btn btn-primary">Run</button>
+					<button id="run" onclick="run()" type="button" class="btn btn-primary">Run</button>
 				</div>
 
-			   <!-- {% endblock %} -->	
+			   <!-- {% endblock %} -->
+			   		  		<!-- output data div -->
+		  		<div class="col-sm-1"></div>
+				<div class="col-sm-11">
+
+						<pre style="width: 100%; background-color: #E91E63; color: #00E676; white-space: pre-line; height: 120px; padding: 5px; overflow: auto;" id="output"></pre>
+				</div>
+				<div class=""></div>
+				<!-- End of output data div -->	
 			</div>
 		  </div>
 		  <div class="col-sm-2">
@@ -128,7 +163,8 @@
 			</p>
 		</div>
 		<script src="/plugins/codemirror/lib/codemirror.js"></script>
-		<script src="/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- <script src="/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+		<script src="/plugins/codemirror/mode/python/python.js"></script>
 		<script src="/dist/js/default.js"></script>
 	</footer>	
 	

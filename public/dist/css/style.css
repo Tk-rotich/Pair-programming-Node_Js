@@ -31,6 +31,10 @@ body{
 	overflow-x: hidden;
 }
 
+pre{
+	margin-top: 2%;
+}
+
 /*#divtextarea textarea {
 	max-height: 30px;
 	overflow: hidden;
